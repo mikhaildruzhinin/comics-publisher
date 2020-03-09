@@ -12,9 +12,9 @@ This script downloads a random [xkcd](https://xkcd.com) comic and uploads it to 
 ```
 VK_GROUP_ID='your group id'
 ```
-You can get group id [here](http://regvk.com/id/).
+You can get group id [here](http://regvk.com/id/).<br/>
 
-3. Use [VK developers page](https://vk.com/dev) to create your app. For more information please read the [documentation](https://vk.com/dev/vkapp_create) on how to create VK apps. Select `standalone app` as a platform.
+3. Use [VK developers page](https://vk.com/dev) to create your app. For more information please read the [documentation](https://vk.com/dev/vkapp_create) on how to create VK apps. Select `standalone app` as a platform.<br/>
 
 4.  Save `client_id` of your app in the `.env` file:
 ```
@@ -28,7 +28,7 @@ VK_GROUP_ID='your group id'
 VK_APP_ID='your app client id'
 VK_ACCESS_TOKEN='your access token'
 ```
-For more inforation on the topic please read the [documentation](https://vk.com/dev/implicit_flow_user).
+For more inforation on the topic please read the [documentation](https://vk.com/dev/implicit_flow_user).<br/>
 
 6. Python3 should be already installed. 
 Use `pip` (or `pip3`, if there is a conflict with Python2) to install dependencies:
