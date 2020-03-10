@@ -39,6 +39,10 @@ def fetch_xkcd_comic(number):
     message = collected_data['alt']
     return filename, message
 
+def check_for_errors(collected_data):
+    if 'error' in collected_data:
+        raise requests.exceptions.HTTPError(collected_data['error'])    
+
 def get_groups_info(access_token, v):
     url = 'https://api.vk.com/method/groups.get'
     payload = {
@@ -47,8 +51,7 @@ def get_groups_info(access_token, v):
     }
     response = requests.get(url, params=payload)
     collected_data = response.json()
-    if 'error' in collected_data:
-        raise requests.exceptions.HTTPError(collected_data['error'])
+    check_for_errors(collected_data)
     return collected_data
 
 def get_group_upload_url(group_id, access_token, v):
@@ -60,8 +63,7 @@ def get_group_upload_url(group_id, access_token, v):
     }
     response = requests.get(url, params=payload)
     collected_data = response.json()
-    if 'error' in collected_data:
-        raise requests.exceptions.HTTPError(collected_data['error'])
+    check_for_errors(collected_data)
     return collected_data
 
 def upload_pic(filename, upload_url):
@@ -74,8 +76,7 @@ def upload_pic(filename, upload_url):
         response = requests.post(url, files=files)
         response.raise_for_status()
         collected_data = response.json()
-        if 'error' in collected_data:
-            raise requests.exceptions.HTTPError(collected_data['error'])
+        check_for_errors(collected_data)
         return collected_data['photo'], collected_data['server'], collected_data['hash']
 
 def save_pic_in_group(group_id, photo, server, hash_, access_token, v):
@@ -91,8 +92,7 @@ def save_pic_in_group(group_id, photo, server, hash_, access_token, v):
     response = requests.post(url, params=payload)
     response.raise_for_status()
     collected_data = response.json()
-    if 'error' in collected_data:
-        raise requests.exceptions.HTTPError(collected_data['error'])
+    check_for_errors(collected_data)
     return collected_data['response'][0]['id'], collected_data['response'][0]['owner_id']
 
 def post_pic(group_id, owner_id, media_id, message, access_token, v):
@@ -107,8 +107,7 @@ def post_pic(group_id, owner_id, media_id, message, access_token, v):
     }
     response = requests.post(url, params=payload)
     collected_data = response.json()
-    if 'error' in collected_data:
-        raise requests.exceptions.HTTPError(collected_data['error'])
+    check_for_errors(collected_data)
     return collected_data
 
 def delete_file(filename):
